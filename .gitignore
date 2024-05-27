@@ -1,2 +1,3 @@
 detect-pneumonia-spring-2024/
 lightning_logs/
+lightning_logs/version_4/checkpoints/epoch=2-step=2814.ckpt
