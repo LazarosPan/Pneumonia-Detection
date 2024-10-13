@@ -26,36 +26,32 @@ Additionally, a `labels_train.csv` file provides the corresponding labels for th
 
 ### 3.1 Architectures
 
-We experimented with several CNN architectures, including **ResNet-18**, **ResNet-34**, and **ResNet-50**, to build models capable of accurately classifying chest X-ray images. Due to the relatively small dataset size, smaller and less complex architectures, like ResNet-18 and ResNet-34, performed better than more complex models.
+Several CNN architectures, including **ResNet-18**, **ResNet-34**, and **ResNet-50**, were experimented with to build models capable of accurately classifying chest X-ray images. Due to the relatively small dataset size, smaller and less complex architectures, like ResNet-18 and ResNet-34, performed better than more complex models.
 
 ### 3.2 Data Augmentation
 
-To improve model generalization and prevent overfitting, we employed various data augmentation techniques such as:
+To improve model generalization and prevent overfitting, various data augmentation techniques were employed such as:
 - Rotation
 - Shear transformations
 - Scaling
 - Zooming
 - Adjusting brightness and contrast
 
-These augmentations helped in diversifying the dataset and improved the model's ability to generalize to unseen test data.
+These augmentations helped diversify the dataset and improved the model's ability to generalize to unseen test data.
 
-### 3.3 Automatic Image Generation
+### 3.3 Learning Rate Scheduling
 
-In addition to traditional augmentation techniques, we employed **automatic image generation** to address the class imbalance issue and expand the dataset size. This was particularly important because the dataset had a limited number of samples, which could hinder the performance of deep learning models.
-
-For each class, we generated up to **50,000** images by creating synthetic variations of existing X-rays using a custom augmentation function. This function dynamically applied transformations such as rotation, width/height shifts, shearing, zooming, and brightness adjustments. The augmentation was applied until the desired number of images per class was achieved. By doing this, we ensured that the model had sufficient data for each class to learn effectively.
-
-This technique allowed us to increase the dataset size significantly, leading to better model generalization and performance.
-
-### 3.4 Learning Rate Scheduling
-
-We explored two learning rate schedulers:
+Two learning rate schedulers were explored:
 - **ReduceLROnPlateau**: Decreases the learning rate when the validation accuracy plateaus, allowing finer adjustments during training.
 - **CyclicLR**: Helps the model escape local minima by cyclically increasing and decreasing the learning rate.
 
-### 3.5 Ensemble Models
+### 3.4 Ensemble Models
 
-We created ensemble models combining different ResNet architectures to lower variance and leverage the strengths of different models. The ensemble models consistently outperformed individual models in terms of accuracy.
+Ensemble models combining different ResNet architectures were created to lower variance and leverage the strengths of different models. The ensemble models consistently outperformed individual models in terms of accuracy.
+
+### 3.5 Automatic Image Generation
+
+Automatic image generation was used to increase the number of images in each class to meet target class sizes, ensuring balanced datasets. For example, when the number of images per class was set to 50,000, additional images were generated using augmentations. Experiments were conducted with different target sizes such as 50,000, 30,000, and 20,000 images per class to assess the impact on model performance. This method of balancing the dataset through automated image generation helped enhance the model's ability to distinguish between classes.
 
 ## 4. Results
 
@@ -89,6 +85,6 @@ The highest accuracy of **86.472%** was achieved by the **V6EB3** ensemble model
 
 ## 5. Conclusions
 
-Our experiments showed that ensemble models significantly outperformed individual models in pneumonia detection from chest X-rays. Specifically, models combining ResNet-18 and ResNet-50 architectures yielded the highest accuracies. ResNet-18 demonstrated strong performance, especially with learning rate schedulers like ReduceLROnPlateau.
+The experiments showed that ensemble models significantly outperformed individual models in pneumonia detection from chest X-rays. Specifically, models combining ResNet-18 and ResNet-50 architectures yielded the highest accuracies. ResNet-18 demonstrated strong performance, especially with learning rate schedulers like ReduceLROnPlateau.
 
-Data augmentation and learning rate scheduling played a critical role in improving model performance. In future work, we plan to further enhance the models by exploring new hyperparameters, expanding the dataset, and potentially using transfer learning techniques. This project demonstrates the potential of deep learning in automating medical diagnostics for pneumonia detection.
+Data augmentation and learning rate scheduling played a critical role in improving model performance. In future work, it is planned to further enhance the models by exploring new hyperparameters, expanding the dataset, and potentially using transfer learning techniques. This project demonstrates the potential of deep learning in automating medical diagnostics for pneumonia detection.
